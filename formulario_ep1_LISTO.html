@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ver con Intención · Episodio 1 · LCA</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+/* ══════════════════════════════════════
+   VARIABLES Y BASE
+══════════════════════════════════════ */
+:root {
+  --navy:   #1A1A2E;
+  --red:    #C0392B;
+  --gold:   #B8860B;
+  --teal:   #0D6E6E;
+  --purple: #5A1A7A;
+  --blue:   #1A4A8A;
+  --cream:  #F7F3EC;
+  --white:  #FDFBF7;
+  --gray:   #6B6B6B;
+  --light-gold:   #FFFBEE;
+  --light-teal:   #F0FAFA;
+  --light-red:    #FFF0EE;
+  --light-purple: #FAF0FF;
+  --border: rgba(26,26,46,0.10);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════════
+   BARRA DE PROGRESO
+══════════════════════════════════════ */
+#progress-bar {
+  position: fixed;
+  top: 0; left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--teal), var(--gold));
+  z-index: 1000;
+  transition: width 0.2s ease;
+}
+
+/* ══════════════════════════════════════
+   HERO
+══════════════════════════════════════ */
+.hero {
+  background: var(--navy);
+  padding: 72px 32px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 50% at 50% -10%,
+    rgba(13,110,110,0.3) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3.5px;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(40px, 7vw, 68px);
+  color: #fff;
+  line-height: 1.05;
+  position: relative; z-index: 1;
+  margin-bottom: 6px;
+}
+.hero h1 em { font-style: italic; color: var(--gold); }
+.hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin-top: 14px;
+  position: relative; z-index: 1;
+  letter-spacing: 0.2px;
+}
+.ep-pill {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 9px 22px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  color: rgba(255,255,255,0.5);
+  position: relative; z-index: 1;
+}
+
+/* ══════════════════════════════════════
+   LAYOUT
+══════════════════════════════════════ */
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 24px 100px;
+}
+
+/* ══════════════════════════════════════
+   INSTRUCCIÓN
+══════════════════════════════════════ */
+.instruccion {
+  background: var(--navy);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 4px 4px 0;
+  padding: 24px 28px;
+  margin: 44px 0 36px;
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8;
+}
+.instruccion strong { color: #fff; font-weight: 500; }
+.instruccion .label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--teal);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+/* ══════════════════════════════════════
+   ESCENA ANCLA
+══════════════════════════════════════ */
+.escena {
+  background: var(--white);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+  padding: 18px 22px;
+  margin-bottom: 32px;
+  font-size: 13.5px;
+  color: var(--gray);
+  line-height: 1.8;
+}
+.escena-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 7px;
+}
+.escena strong { color: var(--navy); font-weight: 500; }
+
+/* ══════════════════════════════════════
+   SECCIÓN
+══════════════════════════════════════ */
+.seccion {
+  margin-bottom: 44px;
+}
+.seccion-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.seccion-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.seccion-meta { flex: 1; }
+.seccion-tag-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-bottom: 2px;
+}
+.seccion-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+/* ══════════════════════════════════════
+   PREGUNTA CARD
+══════════════════════════════════════ */
+.qcard {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 22px 24px;
+  margin-bottom: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.qcard:focus-within {
+  border-color: rgba(13,110,110,0.35);
+  box-shadow: 0 2px 16px rgba(13,110,110,0.07);
+}
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 15.5px;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.q-hint {
+  font-size: 12px;
+  color: var(--gray);
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--navy);
+  padding: 8px 0 10px;
+  resize: none;
+  outline: none;
+  min-height: 88px;
+  transition: border-color 0.2s;
+  line-height: 1.7;
+}
+textarea:focus { border-color: var(--teal); }
+textarea::placeholder {
+  color: rgba(26,26,46,0.25);
+  font-style: italic;
+}
+input[type="text"], input[type="date"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--navy);
+  padding: 8px 0 10px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus { border-color: var(--teal); }
+input::placeholder { color: rgba(26,26,46,0.25); font-style: italic; }
+
+/* ══════════════════════════════════════
+   ESCALA
+══════════════════════════════════════ */
+.escala-wrap { margin-top: 6px; }
+.escala-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+.escala-opciones {
+  display: flex;
+  gap: 8px;
+}
+.escala-opciones input[type="radio"] { display: none; }
+.escala-opciones label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--gray);
+  transition: all 0.15s;
+  user-select: none;
+}
+.escala-opciones label:hover {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+.escala-opciones input:checked + label {
+  background: var(--teal);
+  border-color: var(--teal);
+  color: #fff;
+}
+
+/* ══════════════════════════════════════
+   NOTAS — GRID
+══════════════════════════════════════ */
+.notas-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray);
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* ══════════════════════════════════════
+   BLOQUE ACCIÓN
+══════════════════════════════════════ */
+.accion-bloque {
+  background: var(--navy);
+  border-radius: 4px;
+  padding: 32px 32px 36px;
+  margin-bottom: 14px;
+}
+.accion-bloque h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 6px;
+}
+.accion-bloque .sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.7;
+  margin-bottom: 28px;
+  font-style: italic;
+}
+.accion-bloque textarea,
+.accion-bloque input[type="text"],
+.accion-bloque input[type="date"] {
+  border-bottom-color: rgba(255,255,255,0.15);
+  color: #fff;
+  margin-bottom: 4px;
+}
+.accion-bloque textarea:focus,
+.accion-bloque input:focus {
+  border-bottom-color: var(--teal);
+}
+.accion-bloque textarea::placeholder,
+.accion-bloque input::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+.accion-field { margin-bottom: 24px; }
+.accion-field label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+.accion-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* ══════════════════════════════════════
+   DIVISOR
+══════════════════════════════════════ */
+.divisor {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 12px 0 40px;
+}
+
+/* ══════════════════════════════════════
+   NOMBRE PARTICIPANTE
+══════════════════════════════════════ */
+.nombre-bloque {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 22px 24px;
+  margin-bottom: 32px;
+}
+.nombre-bloque label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--teal);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* ══════════════════════════════════════
+   SUBMIT
+══════════════════════════════════════ */
+.submit-wrap { text-align: center; padding-top: 12px; }
+.submit-note {
+  font-size: 12.5px;
+  color: var(--gray);
+  font-style: italic;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.btn-enviar {
+  display: inline-block;
+  background: var(--teal);
+  color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 18px 52px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-enviar:hover { background: var(--navy); transform: translateY(-2px); }
+.btn-enviar:disabled { background: var(--gray); cursor: not-allowed; transform: none; }
+
+/* ══════════════════════════════════════
+   ESTADOS
+══════════════════════════════════════ */
+.enviando {
+  display: none;
+  text-align: center;
+  padding: 32px;
+  color: var(--gray);
+  font-style: italic;
+}
+.exito {
+  display: none;
+  min-height: 100vh;
+  background: var(--navy);
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 48px 32px;
+}
+.exito.show { display: flex; }
+.exito-icon {
+  width: 68px; height: 68px;
+  background: var(--teal);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px;
+  margin-bottom: 28px;
+}
+.exito h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.exito p {
+  font-size: 14.5px;
+  color: rgba(255,255,255,0.5);
+  max-width: 420px;
+  line-height: 1.8;
+}
+.exito .compromiso-recap {
+  margin-top: 32px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px;
+  padding: 20px 28px;
+  max-width: 480px;
+  text-align: left;
+}
+.exito .compromiso-recap .etq {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+  color: var(--teal);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+.exito .compromiso-recap p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+}
+
+/* ══════════════════════════════════════
+   ERROR
+══════════════════════════════════════ */
+.error-msg {
+  display: none;
+  background: var(--light-red);
+  border-left: 3px solid var(--red);
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--red);
+  border-radius: 0 3px 3px 0;
+  margin-top: 12px;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════ */
+@media (max-width: 600px) {
+  .hero { padding: 52px 20px 44px; }
+  .wrap { padding: 0 16px 80px; }
+  .accion-cols { grid-template-columns: 1fr; }
+  .accion-bloque { padding: 24px 20px 28px; }
+  .instruccion { padding: 18px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ══════════════════════════════════
+     PANTALLA DE ÉXITO
+══════════════════════════════════ -->
+<div class="exito" id="exitoScreen">
+  <div class="exito-icon">✓</div>
+  <h2>Listo.</h2>
+  <p>Tus respuestas fueron enviadas.<br>
+  Tu coach las revisará antes de la próxima sesión.</p>
+  <div class="compromiso-recap" id="exitoCompromiso">
+    <span class="etq">Tu compromiso esta semana</span>
+    <p id="exitoCompromisoTexto"></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     FORMULARIO PRINCIPAL
+══════════════════════════════════ -->
+<div id="mainContent">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Programa LCA · Designated Survivor</div>
+    <h1>Ver con <em>Intención</em></h1>
+    <p class="hero-sub">Responde al terminar el episodio — no durante</p>
+    <div class="ep-pill">Episodio 01 · El Sobreviviente · Semana 1</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- INSTRUCCIÓN -->
+    <div class="instruccion">
+      <span class="label">Antes de responder</span>
+      Este formulario es tuyo. <strong>No hay respuestas correctas ni incorrectas.</strong><br>
+      Escribe lo que realmente pensaste — no lo que crees que debería decir un buen líder.<br>
+      La honestidad aquí es la materia prima de la próxima sesión.
+    </div>
+
+    <!-- NOMBRE -->
+    <div class="nombre-bloque">
+      <label for="nombre">Tu nombre</label>
+      <input type="text" id="nombre" name="nombre"
+        placeholder="¿Cómo quieres que te identifique tu coach?" required>
+    </div>
+
+    <!-- ESCENA ANCLA -->
+    <div class="escena">
+      <span class="escena-tag">Escena ancla · Episodio 1</span>
+      Kirkman está viendo el discurso del Estado de la Unión desde una cabaña — relegado,
+      ya casi fuera del gabinete. Segundos después, el Capitolio explota. Le dicen que es
+      el Presidente. <strong>Su cara no es de héroe. Es de alguien que no quería ese rol.</strong>
+    </div>
+
+    <form id="lcaForm" novalidate>
+
+      <!-- ══════════════════════════
+           CAPA 1: EMOCIONAL
+      ══════════════════════════ -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#C0392B"></div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#C0392B">Capa Emocional</div>
+            <div class="seccion-titulo">El momento de la crisis interna</div>
+          </div>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Qué emoción domina a Kirkman en sus primeros 10 minutos como Presidente?</div>
+          <div class="q-hint">Observa sus silencios, no sus palabras. Los líderes revelan más en lo que no dicen.</div>
+          <textarea name="em1" placeholder="Escribe lo que observaste..."></textarea>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿En qué momento deja de ser víctima de la situación y empieza a asumir? ¿Qué lo activa exactamente?</div>
+          <div class="q-hint">No el momento más dramático. El más incómodo. Ese es el que enseña.</div>
+          <textarea name="em2" placeholder="Describe ese momento con detalle..."></textarea>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- ══════════════════════════
+           CAPA 2: ESTRATÉGICO
+      ══════════════════════════ -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#0D6E6E"></div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#0D6E6E">Capa Estratégica</div>
+            <div class="seccion-titulo">El campo de fuerzas</div>
+          </div>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Quiénes rodean a Kirkman en las primeras horas? ¿Cuáles lo apoyan genuinamente y cuáles lo ven como un problema a gestionar?</div>
+          <div class="q-hint">Los generales, asesores y políticos tienen agendas distintas. Mapéalos mentalmente.</div>
+          <textarea name="es1" placeholder="¿Quién apoya? ¿Quién gestiona? ¿Quién espera que falle?"></textarea>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Cuál es la primera amenaza que no viene del ataque, sino del interior del propio gobierno?</div>
+          <div class="q-hint">La crisis externa es la visible. La interna es la que derriba líderes.</div>
+          <textarea name="es2" placeholder="¿Cuál fue esa amenaza interna?"></textarea>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Qué recursos reales tiene Kirkman que todavía no sabe que tiene?</div>
+          <div class="q-hint">Un líder nuevo subestima siempre su capital. Kirkman tiene algo que ningún político veterano tiene.</div>
+          <textarea name="es3" placeholder="¿Qué ventaja tiene sin saberlo?"></textarea>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- ══════════════════════════
+           CAPA 3: DECISIONAL
+      ══════════════════════════ -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#1A4A8A"></div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#1A4A8A">Capa Decisional</div>
+            <div class="seccion-titulo">Las decisiones bajo fuego</div>
+          </div>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Cuál es la primera decisión real que toma Kirkman? ¿La toma él — o la toman por él?</div>
+          <div class="q-hint">Hay diferencia entre firmar lo que te ponen enfrente y decidir activamente.</div>
+          <textarea name="de1" placeholder="¿Cuál fue esa primera decisión activa?"></textarea>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Con cuánta información decide en sus primeras horas? ¿Qué hace con lo que no sabe?</div>
+          <div class="q-hint">¿Busca certeza antes de actuar — o actúa igual?</div>
+          <textarea name="de2" placeholder="¿Cómo maneja la incertidumbre?"></textarea>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- ══════════════════════════
+           CAPA 4: COMUNICATIVO
+      ══════════════════════════ -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#5A1A7A"></div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#5A1A7A">Capa Comunicativa</div>
+            <div class="seccion-titulo">La comunicación que cambia todo</div>
+          </div>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Cuándo habla Kirkman y cuándo calla? ¿En qué momentos su silencio comunica más que sus palabras?</div>
+          <div class="q-hint">Los líderes inexpertos llenan el silencio. Los efectivos lo usan.</div>
+          <textarea name="co1" placeholder="¿Qué momentos de silencio notaste?"></textarea>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Hay un momento donde su comunicación convence a alguien que dudaba de él? ¿Qué usa: autoridad, lógica o emoción?</div>
+          <div class="q-hint">La legitimidad no se hereda. Se construye en una conversación a la vez.</div>
+          <textarea name="co2" placeholder="¿Qué fue lo que convenció?"></textarea>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- ══════════════════════════
+           CAPA 5: PERSONAL
+      ══════════════════════════ -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#B8860B"></div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#B8860B">Capa Personal · El Espejo</div>
+            <div class="seccion-titulo">¿Qué me dice esto de mí?</div>
+          </div>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿En qué momento del episodio te sentiste más identificado/a con Kirkman? ¿Por qué exactamente ese momento?</div>
+          <div class="q-hint">No el momento más dramático. El más incómodo.</div>
+          <textarea name="pe1" placeholder="¿Qué fue lo que resonó en ti?"></textarea>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Qué habrías hecho diferente en su lugar? ¿Esa diferencia es una fortaleza tuya o un punto ciego?</div>
+          <div class="q-hint">La pregunta honesta: ¿qué rasgo mío me haría actuar así?</div>
+          <textarea name="pe2" placeholder="Sé honesto/a..."></textarea>
+        </div>
+
+        <div class="qcard">
+          <div class="q-text">¿Cuál es tu "Capitolio"? ¿Cuál es la crisis que podría ponerte en el rol que no esperabas?</div>
+          <div class="q-hint">Esta es la pregunta de cierre de la capa. No la respondas rápido.</div>
+          <textarea name="pe3" placeholder="Tómate el tiempo que necesites..."></textarea>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- ══════════════════════════
+           MIS NOTAS
+      ══════════════════════════ -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#1A1A2E"></div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#1A1A2E">Cierre del episodio</div>
+            <div class="seccion-titulo">Mis notas</div>
+          </div>
+        </div>
+
+        <div class="qcard">
+          <span class="notas-label">La escena que más me impactó fue</span>
+          <textarea name="nota1" placeholder="Descríbela con detalle..."></textarea>
+        </div>
+        <div class="qcard">
+          <span class="notas-label">Lo que Kirkman hizo que yo también hago</span>
+          <textarea name="nota2" placeholder="Sé específico/a..."></textarea>
+        </div>
+        <div class="qcard">
+          <span class="notas-label">Lo que Kirkman hizo que yo jamás haría — y por qué</span>
+          <textarea name="nota3" placeholder="¿Por qué no lo harías?"></textarea>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- ══════════════════════════
+           TEST DE VALORACIÓN
+      ══════════════════════════ -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#0D6E6E"></div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#0D6E6E">Test de valoración</div>
+            <div class="seccion-titulo">¿Dónde estoy hoy?</div>
+          </div>
+        </div>
+
+        <p style="font-size:12.5px;color:var(--gray);font-style:italic;margin-bottom:24px;line-height:1.7;">
+          1 = Nunca &nbsp;·&nbsp; 2 = Pocas veces &nbsp;·&nbsp; 3 = A veces &nbsp;·&nbsp;
+          4 = Con frecuencia &nbsp;·&nbsp; 5 = Siempre<br>
+          Responde desde lo que realmente haces — no desde lo que quisieras hacer.
+        </p>
+
+        <!-- T1 -->
+        <div class="qcard">
+          <div class="q-text">Cuando tomo una decisión que incomoda a alguien, la sostengo aunque haya presión para cambiarla.</div>
+          <div class="escala-wrap">
+            <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+            <div class="escala-opciones">
+              <div><input type="radio" name="t1" value="1" id="t1a"><label for="t1a">1</label></div>
+              <div><input type="radio" name="t1" value="2" id="t1b"><label for="t1b">2</label></div>
+              <div><input type="radio" name="t1" value="3" id="t1c"><label for="t1c">3</label></div>
+              <div><input type="radio" name="t1" value="4" id="t1d"><label for="t1d">4</label></div>
+              <div><input type="radio" name="t1" value="5" id="t1e"><label for="t1e">5</label></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T2 -->
+        <div class="qcard">
+          <div class="q-text">Mi equipo sabe con claridad quién toma las decisiones finales en mi área.</div>
+          <div class="escala-wrap">
+            <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+            <div class="escala-opciones">
+              <div><input type="radio" name="t2" value="1" id="t2a"><label for="t2a">1</label></div>
+              <div><input type="radio" name="t2" value="2" id="t2b"><label for="t2b">2</label></div>
+              <div><input type="radio" name="t2" value="3" id="t2c"><label for="t2c">3</label></div>
+              <div><input type="radio" name="t2" value="4" id="t2d"><label for="t2d">4</label></div>
+              <div><input type="radio" name="t2" value="5" id="t2e"><label for="t2e">5</label></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T3 -->
+        <div class="qcard">
+          <div class="q-text">Cuando me ausento, mi equipo funciona sin necesitar mi autorización en cada decisión.</div>
+          <div class="escala-wrap">
+            <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+            <div class="escala-opciones">
+              <div><input type="radio" name="t3" value="1" id="t3a"><label for="t3a">1</label></div>
+              <div><input type="radio" name="t3" value="2" id="t3b"><label for="t3b">2</label></div>
+              <div><input type="radio" name="t3" value="3" id="t3c"><label for="t3c">3</label></div>
+              <div><input type="radio" name="t3" value="4" id="t3d"><label for="t3d">4</label></div>
+              <div><input type="radio" name="t3" value="5" id="t3e"><label for="t3e">5</label></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T4 -->
+        <div class="qcard">
+          <div class="q-text">Tengo al menos 2 personas de confianza que me representan cuando no estoy.</div>
+          <div class="escala-wrap">
+            <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+            <div class="escala-opciones">
+              <div><input type="radio" name="t4" value="1" id="t4a"><label for="t4a">1</label></div>
+              <div><input type="radio" name="t4" value="2" id="t4b"><label for="t4b">2</label></div>
+              <div><input type="radio" name="t4" value="3" id="t4c"><label for="t4c">3</label></div>
+              <div><input type="radio" name="t4" value="4" id="t4d"><label for="t4d">4</label></div>
+              <div><input type="radio" name="t4" value="5" id="t4e"><label for="t4e">5</label></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T5 -->
+        <div class="qcard">
+          <div class="q-text">Creo que tengo el derecho y la responsabilidad de ejercer autoridad en mi rol, aunque no sea popular.</div>
+          <div class="escala-wrap">
+            <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+            <div class="escala-opciones">
+              <div><input type="radio" name="t5" value="1" id="t5a"><label for="t5a">1</label></div>
+              <div><input type="radio" name="t5" value="2" id="t5b"><label for="t5b">2</label></div>
+              <div><input type="radio" name="t5" value="3" id="t5c"><label for="t5c">3</label></div>
+              <div><input type="radio" name="t5" value="4" id="t5d"><label for="t5d">4</label></div>
+              <div><input type="radio" name="t5" value="5" id="t5e"><label for="t5e">5</label></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Abierta -->
+        <div class="qcard">
+          <div class="q-text">Describe una situación reciente donde sentiste que perdiste el control de algo en tu área. ¿Qué pasó?</div>
+          <div class="q-hint">No la cuentes como una historia del equipo. Cuéntala incluyéndote a ti.</div>
+          <textarea name="ta" placeholder="Escribe con detalle..."></textarea>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- ══════════════════════════
+           ACCIÓN DE LA SEMANA
+      ══════════════════════════ -->
+      <div class="accion-bloque">
+        <h3>Mi compromiso esta semana</h3>
+        <p class="sub">
+          ¿Qué es lo único que, si lo hicieras esta semana,<br>
+          sería una señal para ti de que algo está cambiando?<br><br>
+          Necesita tres cosas: qué + con quién + cuándo.<br>
+          Sin las tres, es una intención — no un compromiso.
+        </p>
+
+        <div class="accion-field">
+          <label>Voy a…</label>
+          <textarea name="accion_que" id="accion_que"
+            placeholder="Describe la acción específica..." style="min-height:80px;"></textarea>
+        </div>
+
+        <div class="accion-cols">
+          <div class="accion-field">
+            <label>Con / a quién</label>
+            <input type="text" name="accion_quien"
+              placeholder="Nombre específico">
+          </div>
+          <div class="accion-field">
+            <label>El día exacto</label>
+            <input type="date" name="accion_cuando">
+          </div>
+        </div>
+
+        <div class="accion-field">
+          <label>Sabré que lo cumplí cuando…</label>
+          <input type="text" name="accion_criterio"
+            placeholder="¿Cuál es la señal observable de que lo hiciste?">
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-wrap" style="margin-top:32px;">
+        <p class="submit-note">
+          Al enviar, tu coach recibirá tus respuestas antes de la próxima sesión.<br>
+          Lo más importante no es lo que respondiste — es lo que vas a hacer.
+        </p>
+        <div class="enviando" id="enviandoMsg">Enviando respuestas…</div>
+        <div class="error-msg" id="errorMsg">
+          Hubo un problema al enviar. Por favor intenta de nuevo.
+        </div>
+        <button type="submit" class="btn-enviar" id="btnEnviar">
+          Enviar respuestas →
+        </button>
+      </div>
+
+    </form>
+  </div><!-- /wrap -->
+</div><!-- /mainContent -->
+
+<script>
+// ══════════════════════════════════════════════
+//  CONFIGURACIÓN — CAMBIA SOLO ESTA URL
+//  Instrucciones abajo para obtenerla
+// ══════════════════════════════════════════════
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdmLFJhDbS6d9N5mvu_7Dz9JMDk1WyV4emvYNAIpEGSakedLlgnV_DCDXkvvgT2UgdDA/exec";
+
+// ══════════════════════════════════════════════
+//  BARRA DE PROGRESO
+// ══════════════════════════════════════════════
+window.addEventListener('scroll', () => {
+  const doc = document.documentElement;
+  const pct = (window.scrollY / (doc.scrollHeight - doc.clientHeight)) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+// ══════════════════════════════════════════════
+//  AUTO-RESIZE TEXTAREAS
+// ══════════════════════════════════════════════
+document.querySelectorAll('textarea').forEach(t => {
+  t.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+  });
+});
+
+// ══════════════════════════════════════════════
+//  ENVÍO DEL FORMULARIO
+// ══════════════════════════════════════════════
+document.getElementById('lcaForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const nombre = document.getElementById('nombre').value.trim();
+  if (!nombre) {
+    document.getElementById('nombre').focus();
+    document.getElementById('nombre').style.borderBottomColor = '#C0392B';
+    return;
+  }
+
+  const btn = document.getElementById('btnEnviar');
+  const enviando = document.getElementById('enviandoMsg');
+  const errorMsg = document.getElementById('errorMsg');
+
+  btn.disabled = true;
+  btn.textContent = 'Enviando…';
+  enviando.style.display = 'block';
+  errorMsg.style.display = 'none';
+
+  // Recoger todos los campos
+  const form = e.target;
+  const data = {
+    timestamp: new Date().toLocaleString('es-CO', {timeZone:'America/Bogota'}),
+    episodio: "EP1 - El Sobreviviente",
+    nombre: nombre,
+    em1: form.em1.value,
+    em2: form.em2.value,
+    es1: form.es1.value,
+    es2: form.es2.value,
+    es3: form.es3.value,
+    de1: form.de1.value,
+    de2: form.de2.value,
+    co1: form.co1.value,
+    co2: form.co2.value,
+    pe1: form.pe1.value,
+    pe2: form.pe2.value,
+    pe3: form.pe3.value,
+    nota1: form.nota1.value,
+    nota2: form.nota2.value,
+    nota3: form.nota3.value,
+    test1: form.t1 ? form.t1.value : '',
+    test2: form.t2 ? form.t2.value : '',
+    test3: form.t3 ? form.t3.value : '',
+    test4: form.t4 ? form.t4.value : '',
+    test5: form.t5 ? form.t5.value : '',
+    test_abierta: form.ta.value,
+    accion_que: form.accion_que.value,
+    accion_quien: form.accion_quien.value,
+    accion_cuando: form.accion_cuando.value,
+    accion_criterio: form.accion_criterio.value,
+  };
+
+  try {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    // Mostrar éxito
+    document.getElementById('mainContent').style.display = 'none';
+    const exitoScreen = document.getElementById('exitoScreen');
+    exitoScreen.classList.add('show');
+    document.getElementById('exitoCompromisoTexto').textContent =
+      data.accion_que || '(sin acción registrada)';
+    window.scrollTo(0, 0);
+
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Enviar respuestas →';
+    enviando.style.display = 'none';
+    errorMsg.style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>
