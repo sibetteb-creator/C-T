@@ -10,19 +10,19 @@
    VARIABLES Y BASE
 ══════════════════════════════════════ */
 :root {
-  --navy:   #1A1A2E;
-  --red:    #C0392B;
-  --gold:   #B8860B;
-  --teal:   #0D6E6E;
-  --purple: #5A1A7A;
-  --blue:   #1A4A8A;
-  --cream:  #F7F3EC;
-  --white:  #FDFBF7;
-  --gray:   #6B6B6B;
-  --light-gold:   #FFFBEE;
-  --light-teal:   #F0FAFA;
-  --light-red:    #FFF0EE;
-  --light-purple: #FAF0FF;
+  --navy:   #1e3d58;
+  --red:    #4f1964;
+  --gold:   #9c6dbe;
+  --teal:   #43b0f1;
+  --purple: #9c6dbe;
+  --blue:   #223652;
+  --cream:  #e8eef1;
+  --white:  #ffffff;
+  --gray:   #223652;
+  --light-gold:   #f0f7ff;
+  --light-teal:   #e8eef1;
+  --light-red:    #f5eeff;
+  --light-purple: #f5eeff;
   --border: rgba(26,26,46,0.10);
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +45,7 @@ body {
   top: 0; left: 0;
   height: 3px;
   width: 0%;
-  background: linear-gradient(90deg, var(--teal), var(--gold));
+  background: linear-gradient(90deg, #43b0f1, #9c6dbe);
   z-index: 1000;
   transition: width 0.2s ease;
 }
@@ -65,7 +65,7 @@ body {
   position: absolute;
   inset: 0;
   background: radial-gradient(ellipse 70% 50% at 50% -10%,
-    rgba(13,110,110,0.3) 0%, transparent 65%);
+    rgba(67,176,241,0.25) 0%, transparent 65%);
   pointer-events: none;
 }
 .hero-eyebrow {
@@ -299,7 +299,7 @@ input::placeholder { color: rgba(26,26,46,0.25); font-style: italic; }
   color: var(--navy);
 }
 .escala-opciones input:checked + label {
-  background: var(--teal);
+  background: #43b0f1;
   border-color: var(--teal);
   color: #fff;
 }
@@ -408,7 +408,7 @@ input::placeholder { color: rgba(26,26,46,0.25); font-style: italic; }
 }
 .btn-enviar {
   display: inline-block;
-  background: var(--teal);
+  background: #43b0f1;
   color: #fff;
   font-family: 'DM Mono', monospace;
   font-size: 11px;
@@ -446,7 +446,7 @@ input::placeholder { color: rgba(26,26,46,0.25); font-style: italic; }
 .exito.show { display: flex; }
 .exito-icon {
   width: 68px; height: 68px;
-  background: var(--teal);
+  background: #43b0f1;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 30px;
