@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ver con Intención · Episodio 01 · Piloto</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:   #1e3d58;
+  --blue:   #223652;
+  --teal:   #43b0f1;
+  --purple: #9c6dbe;
+  --dark-purple: #4f1964;
+  --light-blue: #7dcbff;
+  --green:  #aed768;
+  --lila:   #e6affc;
+  --yellow: #ffdb73;
+  --cream:  #e8eef1;
+  --white:  #ffffff;
+  --gray:   #2d4a6b;
+  --border: rgba(30,61,88,0.1);
+  --font-base: 17px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  font-size: var(--font-base);
+  line-height: 1.75;
+  min-height: 100vh;
+}
+
+/* ── PROGRESS ── */
+#progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; width: 0%;
+  background: linear-gradient(90deg, #43b0f1, #9c6dbe);
+  z-index: 1000; transition: width 0.2s ease;
+}
+
+/* ── HERO ── */
+.hero {
+  background: var(--navy);
+  padding: 80px 32px 64px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(67,176,241,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 4px;
+  color: var(--teal); text-transform: uppercase;
+  margin-bottom: 22px; position: relative; z-index: 1;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(44px, 8vw, 72px);
+  color: #fff; line-height: 1.05;
+  position: relative; z-index: 1; margin-bottom: 8px;
+}
+.hero h1 em { font-style: italic; color: var(--purple); }
+.hero-sub {
+  font-size: 16px; color: rgba(255,255,255,0.45);
+  margin-top: 16px; position: relative; z-index: 1;
+}
+.ep-pill {
+  display: inline-block; margin-top: 26px;
+  padding: 10px 24px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 2px;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.5);
+  position: relative; z-index: 1;
+}
+
+/* ── WRAP ── */
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 28px 120px; }
+
+/* ── BLOQUES INFORMATIVOS ── */
+.bloque-info {
+  border-radius: 4px;
+  padding: 28px 32px;
+  margin: 40px 0 28px;
+  font-size: 16px;
+  line-height: 1.85;
+}
+.bloque-info .bloque-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block; margin-bottom: 10px;
+}
+.bloque-antes {
+  background: var(--navy);
+  border-left: 4px solid var(--teal);
+  color: rgba(255,255,255,0.75);
+}
+.bloque-antes .bloque-label { color: var(--teal); }
+.bloque-antes strong { color: #fff; font-weight: 500; }
+
+.bloque-compromiso {
+  background: rgba(67,176,241,0.08);
+  border-left: 4px solid var(--teal);
+  border-radius: 0 4px 4px 0;
+  color: var(--navy);
+  font-size: 16px;
+}
+.bloque-compromiso .bloque-label { color: var(--teal); }
+.bloque-compromiso strong { font-weight: 500; }
+
+/* ── NOMBRE ── */
+.nombre-bloque {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 24px 28px;
+  margin-bottom: 36px;
+}
+.nombre-bloque label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--teal); text-transform: uppercase;
+  display: block; margin-bottom: 10px;
+}
+
+/* ── TEST DE VALORACIÓN ── */
+.test-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 32px 32px 28px;
+  margin-bottom: 36px;
+}
+.test-header {
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+.test-header .tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--teal); text-transform: uppercase;
+  display: block; margin-bottom: 8px;
+}
+.test-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; color: var(--navy);
+}
+.test-instruccion {
+  font-size: 15px; color: var(--gray);
+  font-style: italic; margin-bottom: 28px;
+  line-height: 1.7;
+}
+.test-pregunta {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+}
+.test-pregunta:last-child { border-bottom: none; }
+.test-pregunta .componente {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: var(--purple); text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.test-pregunta .texto {
+  font-size: 17px; color: var(--navy);
+  line-height: 1.6; margin-bottom: 14px;
+  font-family: 'Playfair Display', serif;
+}
+.escala-wrap { display: flex; flex-direction: column; gap: 6px; }
+.escala-labels {
+  display: flex; justify-content: space-between;
+  font-family: 'DM Mono', monospace;
+  font-size: 11px; color: var(--gray);
+}
+.escala-opciones { display: flex; gap: 8px; }
+.escala-opciones input[type="radio"] { display: none; }
+.escala-opciones label {
+  flex: 1; display: flex;
+  align-items: center; justify-content: center;
+  height: 52px;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; cursor: pointer;
+  color: var(--gray);
+  transition: all 0.15s; user-select: none;
+  min-width: 44px;
+}
+.escala-opciones label:hover { border-color: var(--teal); color: var(--navy); }
+.escala-opciones input:checked + label {
+  background: var(--teal); border-color: var(--teal); color: #fff;
+}
+
+/* ── ESCENA ANCLA ── */
+.escena {
+  background: var(--white);
+  border-left: 3px solid var(--purple);
+  border-radius: 0 4px 4px 0;
+  padding: 22px 26px;
+  margin-bottom: 36px;
+  font-size: 16px; color: var(--gray); line-height: 1.85;
+}
+.escena .escena-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--purple); text-transform: uppercase;
+  display: block; margin-bottom: 10px;
+}
+
+/* ── SECCIONES DE CAPAS ── */
+.seccion { margin-bottom: 8px; }
+.seccion-head {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px 28px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px 4px 0 0;
+  border-bottom: none;
+  cursor: pointer;
+  user-select: none;
+}
+.seccion-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.seccion-numero {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: rgba(30,61,88,0.35);
+  flex-shrink: 0;
+}
+.seccion-meta { flex: 1; }
+.seccion-tag-text {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2.5px;
+  text-transform: uppercase; opacity: 0.75;
+  margin-bottom: 2px;
+}
+.seccion-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; line-height: 1.2; color: var(--navy);
+}
+.seccion-body {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  padding: 4px 28px 24px;
+  margin-bottom: 12px;
+}
+
+/* ── TARJETAS DE PREGUNTA ── */
+.qcard {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--border);
+}
+.qcard:last-child { border-bottom: none; }
+.q-codigo {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2px;
+  color: rgba(30,61,88,0.3);
+  margin-bottom: 5px;
+}
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; line-height: 1.55;
+  margin-bottom: 8px; color: var(--navy);
+}
+.q-hint {
+  font-size: 14px; color: var(--gray);
+  font-style: italic; line-height: 1.7;
+  margin-bottom: 16px;
+}
+textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px; font-weight: 300;
+  color: var(--navy);
+  padding: 10px 0 12px;
+  resize: none; outline: none;
+  min-height: 100px;
+  transition: border-color 0.2s;
+  line-height: 1.75;
+}
+textarea:focus { border-color: var(--teal); }
+textarea::placeholder { color: rgba(30,61,88,0.22); font-style: italic; }
+input[type="text"], input[type="date"] {
+  width: 100%;
+  border: none;
+  border-bottom: 1.5px solid var(--border);
+  background: transparent;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px; font-weight: 300;
+  color: var(--navy);
+  padding: 10px 0 12px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+input:focus { border-color: var(--teal); }
+input::placeholder { color: rgba(30,61,88,0.22); font-style: italic; }
+
+/* ── CIERRE DEL EPISODIO ── */
+.cierre-wrap {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 32px 32px 24px;
+  margin-bottom: 12px;
+}
+.cierre-wrap .tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--navy); text-transform: uppercase;
+  display: block; margin-bottom: 6px;
+}
+.cierre-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; color: var(--navy);
+  margin-bottom: 24px;
+}
+.cierre-item { margin-bottom: 24px; }
+.cierre-item label { font-size: 13px !important; letter-spacing: 1.5px !important; font-weight: 500; }
+.cierre-item textarea { font-size: 17px; }
+.cierre-item label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 2.5px;
+  color: var(--gray); text-transform: uppercase;
+  display: block; margin-bottom: 8px;
+}
+
+/* ── OBJETIVOS / ACTIVAR ── */
+.activar-wrap {
+  background: var(--navy);
+  border-radius: 4px;
+  padding: 36px 36px 32px;
+  margin: 12px 0;
+}
+.activar-wrap .tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--teal); text-transform: uppercase;
+  display: block; margin-bottom: 14px;
+}
+.activar-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; color: #fff;
+  margin-bottom: 24px;
+}
+.objetivo {
+  display: flex; gap: 16px;
+  margin-bottom: 20px;
+}
+.objetivo-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 13px; color: var(--teal);
+  flex-shrink: 0; padding-top: 2px;
+}
+.objetivo-texto {
+  font-size: 16px; color: rgba(255,255,255,0.8);
+  line-height: 1.8;
+}
+
+/* ── EJERCICIOS ── */
+.ejercicios-wrap {
+  background: rgba(67,176,241,0.07);
+  border: 1px solid rgba(67,176,241,0.2);
+  border-radius: 4px;
+  padding: 32px 32px 28px;
+  margin: 12px 0;
+}
+.ejercicios-wrap .tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--teal); text-transform: uppercase;
+  display: block; margin-bottom: 14px;
+}
+.ejercicios-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px; color: var(--navy);
+  margin-bottom: 22px;
+}
+.ejercicio-item {
+  display: flex; gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(67,176,241,0.15);
+}
+.ejercicio-item:last-child { border-bottom: none; }
+.ejercicio-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  flex-shrink: 0; margin-top: 8px;
+}
+.ejercicio-texto {
+  font-size: 16px; color: var(--navy);
+  line-height: 1.75;
+}
+
+/* ── FRASE ── */
+.frase-wrap {
+  text-align: center;
+  padding: 48px 32px;
+  margin: 12px 0;
+}
+.frase-wrap blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 3.5vw, 28px);
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.5;
+  max-width: 560px;
+  margin: 0 auto;
+  position: relative;
+}
+.frase-wrap blockquote::before {
+  content: '"';
+  font-size: 80px; color: var(--teal);
+  line-height: 0; position: absolute;
+  top: 20px; left: -20px;
+  opacity: 0.3;
+}
+
+/* ── COMPROMISO ── */
+.compromiso-wrap {
+  background: var(--navy);
+  border-radius: 4px;
+  padding: 36px 36px 40px;
+  margin: 12px 0;
+}
+.compromiso-wrap .tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--teal); text-transform: uppercase;
+  display: block; margin-bottom: 10px;
+}
+.compromiso-wrap h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; color: #fff; margin-bottom: 8px;
+}
+.compromiso-wrap .sub {
+  font-size: 15px; color: rgba(255,255,255,0.45);
+  font-style: italic; line-height: 1.75;
+  margin-bottom: 32px;
+}
+.compromiso-wrap textarea,
+.compromiso-wrap input[type="text"],
+.compromiso-wrap input[type="date"] {
+  border-bottom-color: rgba(255,255,255,0.12);
+  color: #fff;
+}
+.compromiso-wrap textarea:focus,
+.compromiso-wrap input:focus { border-color: var(--teal); }
+.compromiso-wrap textarea::placeholder,
+.compromiso-wrap input::placeholder { color: rgba(255,255,255,0.2); }
+.campo-accion { margin-bottom: 28px; }
+.campo-accion label {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  display: block; margin-bottom: 8px;
+}
+.accion-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+/* ── DIVISOR ── */
+.divisor {
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 4px 0 16px;
+}
+
+/* ── SUBMIT ── */
+.submit-wrap { text-align: center; padding-top: 16px; }
+.submit-note {
+  font-size: 15px; color: var(--gray);
+  font-style: italic; line-height: 1.75;
+  margin-bottom: 24px;
+}
+.btn-enviar {
+  display: inline-block;
+  background: var(--teal); color: #fff;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px; letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 20px 60px;
+  border: none; border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-enviar:hover { background: var(--navy); transform: translateY(-2px); }
+.btn-enviar:disabled { background: var(--gray); cursor: not-allowed; transform: none; }
+.error-msg {
+  display: none;
+  background: #f5eeff;
+  border-left: 3px solid var(--dark-purple);
+  padding: 16px 20px;
+  font-size: 15px; color: var(--dark-purple);
+  border-radius: 0 3px 3px 0;
+  margin-top: 14px;
+}
+
+/* ── ÉXITO ── */
+.exito {
+  display: none; min-height: 100vh;
+  background: var(--navy);
+  align-items: center; justify-content: center;
+  flex-direction: column; text-align: center;
+  padding: 48px 32px;
+}
+.exito.show { display: flex; }
+.exito-icon {
+  width: 72px; height: 72px;
+  background: var(--teal); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px; margin-bottom: 32px;
+}
+.exito h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 44px; color: #fff; margin-bottom: 16px;
+}
+.exito p {
+  font-size: 16px; color: rgba(255,255,255,0.5);
+  max-width: 440px; line-height: 1.85;
+}
+.exito .recap {
+  margin-top: 36px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 4px; padding: 24px 32px;
+  max-width: 500px; text-align: left;
+}
+.exito .recap .etq {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  color: var(--teal); text-transform: uppercase;
+  margin-bottom: 10px; display: block;
+}
+.exito .recap p { font-size: 15px; color: rgba(255,255,255,0.75); }
+
+@media (max-width: 600px) {
+  .hero { padding: 56px 20px 48px; }
+  .wrap { padding: 0 18px 80px; }
+  .accion-grid { grid-template-columns: 1fr; }
+  .seccion-head, .seccion-body { padding-left: 20px; padding-right: 20px; }
+  .activar-wrap, .compromiso-wrap { padding: 28px 22px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- ÉXITO -->
+<div class="exito" id="exitoScreen">
+  <div class="exito-icon">✓</div>
+  <h2>Listo.</h2>
+  <p>Tus respuestas fueron enviadas.<br>Tu coach las revisará antes de la próxima sesión.</p>
+  <div class="recap">
+    <span class="etq">Tu compromiso esta semana</span>
+    <p id="exitoTexto"></p>
+  </div>
+</div>
+
+<!-- CONTENIDO PRINCIPAL -->
+<div id="mainContent">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Programa de Entrenamiento Liderazgo Estratégico</div>
+    <h1>Ver con <em>Intención</em></h1>
+    <p class="hero-sub">Responde al terminar el episodio; no durante</p>
+    <div class="ep-pill">Serie &nbsp;·&nbsp; Designated Survivor &nbsp;·&nbsp; Episodio 01 &nbsp;·&nbsp; Piloto &nbsp;·&nbsp; Semana 1</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- ANTES DE RESPONDER -->
+    <div class="bloque-info bloque-antes" style="margin-top:48px;">
+      <span class="bloque-label">Antes de responder</span>
+      Este formulario es tuyo. <strong>No hay respuestas correctas ni incorrectas.</strong><br>
+      Escribe lo que realmente pensaste; no lo que crees que debería decir un buen líder.<br>
+      La honestidad es el insumo crítico de este proceso; sobre ella estructuraremos la sesión para garantizar el fortalecimiento de tus competencias y tu evolución profesional.
+    </div>
+
+    <!-- COMPROMISO -->
+    <div class="bloque-info bloque-compromiso">
+      <span class="bloque-label">Mi compromiso al abrir este formulario</span>
+      Responderé únicamente desde mi realidad y conocimiento propio, sin apoyos externos. <strong>Este contenido es de mi autoría</strong> y constituye el insumo clave para potenciar mis habilidades y asegurar un progreso real en este proceso.
+    </div>
+
+    <!-- NOMBRE -->
+    <div class="nombre-bloque">
+      <label for="nombre">Tu nombre completo</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre completo" required>
+    </div>
+
+    <!-- TEST DE VALORACIÓN -->
+    <div class="test-wrap">
+      <div class="test-header">
+        <span class="tag">Test de valoración</span>
+        <h2>¿Dónde estoy hoy?</h2>
+      </div>
+      <p class="test-instruccion">1 = Nunca &nbsp;·&nbsp; 2 = Pocas veces &nbsp;·&nbsp; 3 = A veces &nbsp;·&nbsp; 4 = Con frecuencia &nbsp;·&nbsp; 5 = Siempre<br>
+      Responde desde lo que realmente haces, no desde lo que quisieras hacer.</p>
+
+      <!-- TV01 -->
+      <div class="test-pregunta">
+        <div class="componente">Autoconciencia emocional</div>
+        <div class="texto">¿Puedo identificar en tiempo real qué emoción está operando en mí cuando estoy bajo presión, antes de que afecte mi decisión?</div>
+        <div class="escala-wrap">
+          <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+          <div class="escala-opciones">
+            <div><input type="radio" name="tv01" value="1" id="tv01_1"><label for="tv01_1">1</label></div>
+            <div><input type="radio" name="tv01" value="2" id="tv01_2"><label for="tv01_2">2</label></div>
+            <div><input type="radio" name="tv01" value="3" id="tv01_3"><label for="tv01_3">3</label></div>
+            <div><input type="radio" name="tv01" value="4" id="tv01_4"><label for="tv01_4">4</label></div>
+            <div><input type="radio" name="tv01" value="5" id="tv01_5"><label for="tv01_5">5</label></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TV02 -->
+      <div class="test-pregunta">
+        <div class="componente">Mapeo de poder</div>
+        <div class="texto">Cuando entro a una reunión o situación nueva, sé leer quién tiene el poder real, más allá de los títulos o cargos.</div>
+        <div class="escala-wrap">
+          <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+          <div class="escala-opciones">
+            <div><input type="radio" name="tv02" value="1" id="tv02_1"><label for="tv02_1">1</label></div>
+            <div><input type="radio" name="tv02" value="2" id="tv02_2"><label for="tv02_2">2</label></div>
+            <div><input type="radio" name="tv02" value="3" id="tv02_3"><label for="tv02_3">3</label></div>
+            <div><input type="radio" name="tv02" value="4" id="tv02_4"><label for="tv02_4">4</label></div>
+            <div><input type="radio" name="tv02" value="5" id="tv02_5"><label for="tv02_5">5</label></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TV03 -->
+      <div class="test-pregunta">
+        <div class="componente">Clasificación de decisiones</div>
+        <div class="texto">Distingo con claridad qué decisiones puedo tomar rápido y cuáles requieren más análisis antes de actuar.</div>
+        <div class="escala-wrap">
+          <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+          <div class="escala-opciones">
+            <div><input type="radio" name="tv03" value="1" id="tv03_1"><label for="tv03_1">1</label></div>
+            <div><input type="radio" name="tv03" value="2" id="tv03_2"><label for="tv03_2">2</label></div>
+            <div><input type="radio" name="tv03" value="3" id="tv03_3"><label for="tv03_3">3</label></div>
+            <div><input type="radio" name="tv03" value="4" id="tv03_4"><label for="tv03_4">4</label></div>
+            <div><input type="radio" name="tv03" value="5" id="tv03_5"><label for="tv03_5">5</label></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TV04 -->
+      <div class="test-pregunta">
+        <div class="componente">Claridad estructural</div>
+        <div class="texto">Cuando comunico una posición difícil, lo hago con claridad, sin rodeos ni exceso de justificación.</div>
+        <div class="escala-wrap">
+          <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+          <div class="escala-opciones">
+            <div><input type="radio" name="tv04" value="1" id="tv04_1"><label for="tv04_1">1</label></div>
+            <div><input type="radio" name="tv04" value="2" id="tv04_2"><label for="tv04_2">2</label></div>
+            <div><input type="radio" name="tv04" value="3" id="tv04_3"><label for="tv04_3">3</label></div>
+            <div><input type="radio" name="tv04" value="4" id="tv04_4"><label for="tv04_4">4</label></div>
+            <div><input type="radio" name="tv04" value="5" id="tv04_5"><label for="tv04_5">5</label></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TV05 -->
+      <div class="test-pregunta">
+        <div class="componente">Reconocimiento de patrones propios</div>
+        <div class="texto">Soy capaz de identificar cuándo estoy reaccionando desde un patrón automático, en lugar de respondiendo conscientemente.</div>
+        <div class="escala-wrap">
+          <div class="escala-labels"><span>Nunca</span><span>Siempre</span></div>
+          <div class="escala-opciones">
+            <div><input type="radio" name="tv05" value="1" id="tv05_1"><label for="tv05_1">1</label></div>
+            <div><input type="radio" name="tv05" value="2" id="tv05_2"><label for="tv05_2">2</label></div>
+            <div><input type="radio" name="tv05" value="3" id="tv05_3"><label for="tv05_3">3</label></div>
+            <div><input type="radio" name="tv05" value="4" id="tv05_4"><label for="tv05_4">4</label></div>
+            <div><input type="radio" name="tv05" value="5" id="tv05_5"><label for="tv05_5">5</label></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /test-wrap -->
+
+    <!-- ESCENA ANCLA -->
+    <div class="escena">
+      <span class="escena-tag">Escena ancla · Serie Designated Survivor · Episodio 01 · Piloto</span>
+      Kirkman está viendo el discurso del Estado de la Unión desde una cabaña, relegado, ya casi fuera del gabinete. Segundos después, el Capitolio explota. Le dicen que es el Presidente. Su cara no es de héroe. Es de alguien que no quería ese rol.
+    </div>
+
+    <form id="lcaForm" novalidate>
+
+      <!-- CAPA 01 -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#4f1964"></div>
+          <div class="seccion-numero">01</div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#4f1964">Capa Emocional · Inteligencia Emocional bajo Presión</div>
+            <div class="seccion-titulo">El momento de la crisis interna</div>
+          </div>
+        </div>
+        <div class="seccion-body">
+          <div class="qcard">
+            <div class="q-codigo">PS1-CIE01-01</div>
+            <div class="q-text">¿Qué emoción domina a Kirkman en sus primeros 10 minutos como Presidente?</div>
+            <div class="q-hint">Observa sus silencios, no sus palabras. Los líderes revelan más en lo que no dicen.</div>
+            <textarea name="q01" placeholder="Escribe aquí..."></textarea>
+          </div>
+          <div class="qcard">
+            <div class="q-codigo">PS1-CIE01-02</div>
+            <div class="q-text">¿En qué momento deja de ser víctima de la situación y empieza a asumir? ¿Qué lo activa exactamente?</div>
+            <div class="q-hint">No el momento más dramático. El más incómodo. Ese es el que enseña.</div>
+            <textarea name="q02" placeholder="Escribe aquí..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPA 02 -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#43b0f1"></div>
+          <div class="seccion-numero">02</div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#43b0f1">Capa Estratégica · Pensamiento Estratégico y Lectura del Sistema</div>
+            <div class="seccion-titulo">El campo de fuerzas</div>
+          </div>
+        </div>
+        <div class="seccion-body">
+          <div class="qcard">
+            <div class="q-codigo">PS1-CPE02-03</div>
+            <div class="q-text">¿Quiénes rodean a Kirkman en las primeras horas? ¿Cuáles lo apoyan genuinamente y cuáles lo ven como un problema a gestionar?</div>
+            <div class="q-hint">Los generales, asesores y políticos tienen agendas distintas. Mapéalos mentalmente.</div>
+            <textarea name="q03" placeholder="Escribe aquí..."></textarea>
+          </div>
+          <div class="qcard">
+            <div class="q-codigo">PS1-CPE02-04</div>
+            <div class="q-text">¿Cuál es la primera amenaza que no viene del ataque, sino del interior del propio gobierno?</div>
+            <div class="q-hint">La crisis externa es la visible. La interna es la que derriba líderes.</div>
+            <textarea name="q04" placeholder="Escribe aquí..."></textarea>
+          </div>
+          <div class="qcard">
+            <div class="q-codigo">PS1-CPE02-05</div>
+            <div class="q-text">¿Qué recursos reales tiene Kirkman que todavía no sabe que tiene?</div>
+            <div class="q-hint">Un líder nuevo subestima siempre su capital. Kirkman tiene algo que ningún político veterano tiene.</div>
+            <textarea name="q05" placeholder="Escribe aquí..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPA 03 -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#223652"></div>
+          <div class="seccion-numero">03</div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#43b0f1">Capa Decisional · Toma de Decisiones en Volatilidad</div>
+            <div class="seccion-titulo">Las decisiones bajo fuego</div>
+          </div>
+        </div>
+        <div class="seccion-body">
+          <div class="qcard">
+            <div class="q-codigo">PS1-CTD03-06</div>
+            <div class="q-text">¿Cuál es la primera decisión real que toma Kirkman? ¿La toma él, o la toman por él?</div>
+            <div class="q-hint">Hay diferencia entre firmar lo que te ponen enfrente y decidir activamente.</div>
+            <textarea name="q06" placeholder="Escribe aquí..."></textarea>
+          </div>
+          <div class="qcard">
+            <div class="q-codigo">PS1-CTD03-07</div>
+            <div class="q-text">¿Con cuánta información decide en sus primeras horas? ¿Qué hace con lo que no sabe? ¿Busca certeza antes de actuar, o actúa igual?</div>
+            <div class="q-hint">El umbral de suficiencia: ¿cuándo es suficiente para moverse?</div>
+            <textarea name="q07" placeholder="Escribe aquí..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPA 04 -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#9c6dbe"></div>
+          <div class="seccion-numero">04</div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#9c6dbe">Capa Comunicativa · Comunicación Asertiva y Construcción de Autoridad</div>
+            <div class="seccion-titulo">La comunicación que cambia todo</div>
+          </div>
+        </div>
+        <div class="seccion-body">
+          <div class="qcard">
+            <div class="q-codigo">PS1-CCA04-08</div>
+            <div class="q-text">¿Cuándo habla Kirkman y cuándo calla? ¿En qué momentos su silencio comunica más que sus palabras?</div>
+            <div class="q-hint">Los líderes inexpertos llenan el silencio. Los efectivos lo usan.</div>
+            <textarea name="q08" placeholder="Escribe aquí..."></textarea>
+          </div>
+          <div class="qcard">
+            <div class="q-codigo">PS1-CCA04-09</div>
+            <div class="q-text">¿Hay un momento donde su comunicación convence a alguien que dudaba de él? ¿Qué usa: autoridad, lógica o emoción?</div>
+            <div class="q-hint">La legitimidad no se hereda. Se construye en una conversación a la vez.</div>
+            <textarea name="q09" placeholder="Escribe aquí..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAPA 05 -->
+      <div class="seccion">
+        <div class="seccion-head">
+          <div class="seccion-dot" style="background:#aed768"></div>
+          <div class="seccion-numero">05</div>
+          <div class="seccion-meta">
+            <div class="seccion-tag-text" style="color:#aed768">Capa Personal · Autoconocimiento y Transferencia</div>
+            <div class="seccion-titulo">De lo que hoy me doy cuenta sobre mi realidad</div>
+          </div>
+        </div>
+        <div class="seccion-body">
+          <div class="qcard">
+            <div class="q-codigo">PS1-CCP05-10</div>
+            <div class="q-text">¿En qué momento del episodio te sentiste más identificado/a con Kirkman? ¿Por qué exactamente ese momento?</div>
+            <div class="q-hint">No el momento más dramático. El más incómodo.</div>
+            <textarea name="q10" placeholder="Escribe aquí..."></textarea>
+          </div>
+          <div class="qcard">
+            <div class="q-codigo">PS1-CCP05-11</div>
+            <div class="q-text">¿Qué habrías hecho diferente en su lugar? ¿Esa diferencia es una fortaleza tuya o un punto ciego?</div>
+            <div class="q-hint">La pregunta honesta: ¿qué rasgo mío me haría actuar así?</div>
+            <textarea name="q11" placeholder="Escribe aquí..."></textarea>
+          </div>
+          <div class="qcard">
+            <div class="q-codigo">PS1-CCP05-12</div>
+            <div class="q-text">¿Cuál es tu "Capitolio"? ¿Cuál es la crisis que podría ponerte en el rol que no esperabas?</div>
+            <div class="q-hint">Esta es la pregunta de cierre de la capa. No la respondas rápido.</div>
+            <textarea name="q12" placeholder="Escribe aquí..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- CIERRE DEL EPISODIO -->
+      <div class="cierre-wrap">
+        <span class="tag">Cierre del episodio</span>
+        <h2>Mis notas</h2>
+        <div class="cierre-item">
+          <label>PCE-13 &nbsp;·&nbsp; La escena que más me impactó fue</label>
+          <textarea name="pce13" placeholder="Describe la escena y qué te generó..." style="min-height:80px;"></textarea>
+        </div>
+        <div class="cierre-item">
+          <label>PCE-14 &nbsp;·&nbsp; Lo que Kirkman hizo que yo también hago</label>
+          <textarea name="pce14" placeholder="Sé específico/a..." style="min-height:80px;"></textarea>
+        </div>
+        <div class="cierre-item" style="margin-bottom:0;">
+          <label>PCE-15 &nbsp;·&nbsp; Lo que Kirkman hizo que yo jamás haría y por qué</label>
+          <textarea name="pce15" placeholder="¿Por qué exactamente no lo harías?" style="min-height:80px;"></textarea>
+        </div>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- LO QUE ESTE EPISODIO ESPERA ACTIVAR -->
+      <div class="activar-wrap">
+        <span class="tag">Reflexión final</span>
+        <h2>Lo que este episodio espera activar en ti</h2>
+        <div class="objetivo">
+          <div class="objetivo-num">01</div>
+          <div class="objetivo-texto">Reconocer las emociones en el momento en que aparecen bajo presión y usarlas como información estratégica para mantener la función ejecutiva, sin dejarse gobernar por ellas ni reaccionar desde patrones automáticos.</div>
+        </div>
+        <div class="objetivo">
+          <div class="objetivo-num">02</div>
+          <div class="objetivo-texto">Leer el contexto con precisión identificando quién tiene poder real, qué amenazas vienen del interior y qué recursos propios están disponibles para tomar decisiones con criterio propio y no desde la inercia de la situación.</div>
+        </div>
+      </div>
+
+      <!-- EJERCICIOS -->
+      <div class="ejercicios-wrap">
+        <span class="tag">Herramientas prácticas</span>
+        <h2>Ejercicios que van a potenciar tu desarrollo</h2>
+        <div class="ejercicio-item">
+          <div class="ejercicio-dot"></div>
+          <div class="ejercicio-texto"><strong>Pausa de 90 segundos (Jill Bolte Taylor):</strong> la carga química de una emoción dura 90 segundos si no la alimentas. Practica la pausa antes de responder.</div>
+        </div>
+        <div class="ejercicio-item">
+          <div class="ejercicio-dot"></div>
+          <div class="ejercicio-texto"><strong>Antes de cada reunión importante:</strong> ¿en qué estado emocional está llegando cada persona clave? Léelos antes de que abran la boca.</div>
+        </div>
+        <div class="ejercicio-item">
+          <div class="ejercicio-dot"></div>
+          <div class="ejercicio-texto"><strong>Test de la puerta de dos vías (Bezos):</strong> antes de cada decisión, pregunta: ¿es reversible? Si sí, decide rápido. Si no, tómate el tiempo necesario.</div>
+        </div>
+      </div>
+
+      <!-- FRASE -->
+      <div class="frase-wrap">
+        <blockquote>Lo que sientes en ese momento no es debilidad. Es información. Úsala.</blockquote>
+      </div>
+
+      <div class="divisor"></div>
+
+      <!-- COMPROMISO -->
+      <div class="compromiso-wrap">
+        <span class="tag">Compromiso de la semana</span>
+        <h2>Mi compromiso esta semana</h2>
+        <p class="sub">¿Qué es lo único que, si lo hicieras esta semana, sería una señal para ti de que algo está cambiando?<br><br>
+        Necesita tres cosas: qué + con quién + cuándo.<br>Sin las tres, es una intención; no un compromiso.</p>
+        <div class="campo-accion">
+          <label>Voy a…</label>
+          <textarea name="accion_que" id="accion_que" placeholder="Describe la acción específica..." style="min-height:80px;"></textarea>
+        </div>
+        <div class="accion-grid">
+          <div class="campo-accion">
+            <label>Con / a quién</label>
+            <input type="text" name="accion_quien" placeholder="Nombre específico">
+          </div>
+          <div class="campo-accion">
+            <label>El día exacto</label>
+            <input type="date" name="accion_cuando">
+          </div>
+        </div>
+        <div class="campo-accion" style="margin-bottom:0;">
+          <label>Sabré que lo cumplí cuando…</label>
+          <input type="text" name="accion_criterio" placeholder="¿Cuál es la señal observable de que lo hiciste?">
+        </div>
+      </div>
+
+      <!-- ENVIAR -->
+      <div class="submit-wrap" style="margin-top:36px;">
+        <p class="submit-note">Al enviar, tu coach recibirá tus respuestas antes de la próxima sesión.<br>
+        Lo más importante no es lo que respondiste; es lo que vas a hacer.</p>
+        <div class="error-msg" id="errorMsg">Hubo un problema al enviar. Por favor intenta de nuevo.</div>
+        <button type="submit" class="btn-enviar" id="btnEnviar">Enviar respuestas →</button>
+      </div>
+
+    </form>
+  </div><!-- /wrap -->
+</div><!-- /mainContent -->
+
+<script>
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwdmLFJhDbS6d9N5mvu_7Dz9JMDk1WyV4emvYNAIpEGSakedLlgnV_DCDXkvvgT2UgdDA/exec";
+
+window.addEventListener('scroll', () => {
+  const d = document.documentElement;
+  const pct = window.scrollY / (d.scrollHeight - d.clientHeight) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+});
+
+document.querySelectorAll('textarea').forEach(t => {
+  t.addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = this.scrollHeight + 'px';
+  });
+});
+
+document.getElementById('lcaForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const nombre = document.getElementById('nombre').value.trim();
+  if (!nombre) { document.getElementById('nombre').focus(); return; }
+  const btn = document.getElementById('btnEnviar');
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  document.getElementById('errorMsg').style.display = 'none';
+
+  const data = {
+    timestamp: new Date().toLocaleString('es-CO', {timeZone:'America/Bogota'}),
+    episodio: 'EP01 - Piloto',
+    nombre
+  };
+  new FormData(this).forEach((v, k) => { data[k] = v; });
+
+  // Test de valoración
+  ['tv01','tv02','tv03','tv04','tv05'].forEach(k => {
+    const el = document.querySelector('input[name="'+k+'"]:checked');
+    data[k] = el ? el.value : '';
+  });
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('exitoScreen').classList.add('show');
+    document.getElementById('exitoTexto').textContent = data.accion_que || '(sin acción registrada)';
+    window.scrollTo(0, 0);
+  } catch(err) {
+    btn.disabled = false; btn.textContent = 'Enviar respuestas →';
+    document.getElementById('errorMsg').style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>
